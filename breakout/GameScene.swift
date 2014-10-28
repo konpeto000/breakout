@@ -208,7 +208,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         }
         
     }
-    
+
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         showString.text = ("Life:\(ballLife)  Score:\(score)")

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5097236F-2D75-41D2-AE10-7B06A9F9EBE5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>breakout</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>83DF1A2971CCB2C92A20F3B663B3ABED4133D42A</key>
+		<string>https://github.com/konpeto000/breakout.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>breakout.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>83DF1A2971CCB2C92A20F3B663B3ABED4133D42A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/konpeto000/breakout.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>83DF1A2971CCB2C92A20F3B663B3ABED4133D42A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>83DF1A2971CCB2C92A20F3B663B3ABED4133D42A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>breakout</string>
+		</dict>
+	</array>
+</dict>
+</plist>
