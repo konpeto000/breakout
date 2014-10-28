@@ -25,17 +25,23 @@ extension SKNode {
     }
 }
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController,EscapeProtocol{
+    
+    var skView: SKView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        skView = self.view as? SKView
+        skView!.ignoresSiblingOrder = true
+        startGame()
+        
+        /*
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
             let skView = self.view as SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
+            skView.showsFPS = false
+            skView.showsNodeCount = false
+
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
             
@@ -43,9 +49,32 @@ class GameViewController: UIViewController {
             scene.scaleMode = .AspectFill
             
             skView.presentScene(scene)
+        }*/
+    }
+    
+    func startGame(){
+        let scene = GameScene()
+        scene.delegate_escape = self
+        scene.size = self.skView!.bounds.size
+        self.skView!.presentScene(scene)
+    }
+    func gameover(){
+        let scene = GameOver()
+        scene.delegate_escape = self
+        scene.size = self.skView!.bounds.size
+        self.skView!.presentScene(scene)
+    }
+
+    func escape(scene: SKScene) {
+        
+        if scene.isKindOfClass(GameOver) {
+            startGame()
+        } else if scene.isKindOfClass(GameScene) {
+            gameover()
         }
     }
 
+    
     override func shouldAutorotate() -> Bool {
         return true
     }
