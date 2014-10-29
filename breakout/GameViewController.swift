@@ -27,7 +27,7 @@ extension SKNode {
 
 class GameViewController: UIViewController,EscapeProtocol{
     
-    var skView: SKView?
+    var skView:SKView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +38,13 @@ class GameViewController: UIViewController,EscapeProtocol{
     }
     
     func startGame(){
-        let scene = GameScene()
+        let scene = GameScene(size: skView!.bounds.size)
         scene.delegate_escape = self
-        scene.size = self.skView!.bounds.size
         self.skView!.presentScene(scene)
     }
     func gameover(){
-        let scene = GameOver()
+        let scene = GameOver(size: skView!.bounds.size)
         scene.delegate_escape = self
-        scene.size = self.skView!.bounds.size
         self.skView!.presentScene(scene)
     }
 

@@ -53,7 +53,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     let playerCategory:UInt32 = 1 << 3
     let deadCategory:  UInt32 = 1 << 4
     
-    func initialize(){
+    
+    override init(size:CGSize){
+        super.init(size: size)
         
         //backbroundcolor
         self.backgroundColor = UIColor.grayColor()
@@ -76,7 +78,6 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         showString = SKLabelNode()
         showString.text = ("Life:\(ballLife)  Score:\(score)")
         showString.position = CGPointMake(self.size.width/2, self.size.height-showString.frame.height-20)
-        self.addChild(showString)
         
         //deadzone
         deadzone = SKSpriteNode()
@@ -85,7 +86,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         deadzone.physicsBody?.dynamic = false
         deadzone.physicsBody?.collisionBitMask = deadCategory
         deadzone.physicsBody?.contactTestBitMask = ballCategory
-        self.addChild(deadzone)
+
         
         //block
         for (var i:Int = 1;i <= self.block_row;i++){
@@ -122,15 +123,21 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         ball.physicsBody?.restitution = 1
         ball.physicsBody?.friction = 0
         ball.physicsBody?.linearDamping = 0
-        self.addChild(self.player)
-        self.addChild(self.ball)
+        
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 
     override func didMoveToView(view: SKView) {
-
-        initialize()
-    
+        
+        self.addChild(showString)
+        self.addChild(deadzone)
+        self.addChild(player)
+        self.addChild(ball)
+        
     }
 
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -155,7 +162,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     func movingBall(){
         loop = true
         var rnd = CGFloat(arc4random()%30)
-        let ballVel = CGVector(((arc4random()%2 == 0) ? -200-rnd:200+rnd),200)
+        let ballVel = CGVector(((arc4random()%2 == 0) ? -200-rnd:200+rnd),200+rnd)
         ball.physicsBody?.velocity = ballVel
     }
     
