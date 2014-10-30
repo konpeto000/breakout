@@ -33,7 +33,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     //Block
     let block_row:Int = 10,block_col:Int = 10
     let block_width:CGFloat = 30,block_height:CGFloat = 20
-    let margin:CGFloat = 2
+    let margin:CGFloat = 1
     var block_x:CGFloat!,block_y:CGFloat!
     
     //Player Bar
@@ -91,11 +91,13 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         //block
         for (var i:Int = 1;i <= self.block_row;i++){
             for(var j:Int = 1;j <= self.block_col;j++){
-                let block = SKSpriteNode(color:UIColor.blueColor().colorWithAlphaComponent(1-CGFloat(j)/CGFloat((block_row+1)*(block_col+1))*10),size:CGSizeMake(block_width,block_height))
+                let block = SKSpriteNode(color:UIColor.blueColor(),size:CGSizeMake(block_width,block_height))
                 let block_position = CGPointMake(CGFloat(i)*(self.size.width/CGFloat(block_row+1)), self.size.height-CGFloat(j)*(block_height+margin)-50)
                 block.name = "block"
                 block.position = block_position
                 block.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(block_width, block_height))
+                block.userData = NSMutableDictionary(dictionary: ["life":Int(arc4random()%3+1)])
+                block.alpha *= block.userData?.valueForKey("life") as NSNumber / 10
                 block.physicsBody?.dynamic = false
                 block.physicsBody?.collisionBitMask = blockCategory
                 block.physicsBody?.contactTestBitMask = ballCategory
@@ -197,9 +199,15 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             switch second.collisionBitMask{
             case blockCategory:
                 accelerate()
-                score = score + 100 + 100*score_mag
+                score = score + 10 + 10*score_mag
                 score_mag = score_mag + 1
-                second.node?.removeFromParent()
+                var life :Int = second.node?.userData?.valueForKey("life") as NSNumber
+                life--
+                second.node?.userData?.setObject(life, forKey: "life")
+                second.node?.alpha *= 0.5
+                if((second.node?.userData?.valueForKey("life") as NSNumber) < 1){
+                    second.node?.removeFromParent()
+                }
             case deadCategory :
                 if(ballLife > 1){
                     reboneflag = true
