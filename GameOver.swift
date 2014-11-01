@@ -43,6 +43,7 @@ class GameOver: SKScene {
         score.position.x = finalScore.position.x
         score.position.y = finalScore.position.y-100
         board.addChild(score)
+        
         let ud = NSUserDefaults()
         let beforeScore = ud.integerForKey("highscore")
         if(beforeScore < Int(values.score * values.life)){

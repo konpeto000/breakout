@@ -97,7 +97,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 block.position = block_position
                 block.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(block_width, block_height))
                 block.userData = NSMutableDictionary(dictionary: ["life":Int(arc4random()%3+1)])
-                block.alpha *= block.userData?.valueForKey("life") as NSNumber / 10
+                block.alpha *= block.userData?.valueForKey("life") as CGFloat / 5
                 block.physicsBody?.dynamic = false
                 block.physicsBody?.collisionBitMask = blockCategory
                 block.physicsBody?.contactTestBitMask = ballCategory
@@ -164,7 +164,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     func movingBall(){
         loop = true
         var rnd = CGFloat(arc4random()%30)
-        let ballVel = CGVector(((arc4random()%2 == 0) ? -200-rnd:200+rnd),200+rnd)
+        let ballVel = CGVector(dx:((arc4random()%2 == 0) ? -200-rnd:200+rnd),dy:200+rnd)
         ball.physicsBody?.velocity = ballVel
     }
     
@@ -176,7 +176,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         reboneflag = false
         ballLife = ballLife - 1
         loop = false
-        ball.physicsBody?.velocity = CGVector(0,0)
+        ball.physicsBody?.velocity = CGVector(dx:0,dy:0)
         player.position = CGPointMake(x,y)
         ball.position = CGPointMake(bx, by)
     }
@@ -201,11 +201,11 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
                 accelerate()
                 score = score + 10 + 10*score_mag
                 score_mag = score_mag + 1
-                var life :Int = second.node?.userData?.valueForKey("life") as NSNumber
+                var life :Int = (second.node?.userData?.valueForKey("life") as Int)
                 life--
                 second.node?.userData?.setObject(life, forKey: "life")
                 second.node?.alpha *= 0.5
-                if((second.node?.userData?.valueForKey("life") as NSNumber) < 1){
+                if((second.node?.userData?.valueForKey("life") as Int) < 1){
                     second.node?.removeFromParent()
                 }
             case deadCategory :

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "breakout/GameViewController.swift"
-            timestampString = "436120061.880861"
+            timestampString = "436516575.331964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
             landmarkName = "GameViewController"
             landmarkType = "3">
          </BreakpointContent>
